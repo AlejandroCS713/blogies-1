@@ -65,7 +65,7 @@
                 Laravel
             </h3>--}}
             <h2
-                class="text-2xl font-semibold leading-tight text-slate-800 dark:text-slate-200 md:text-4xl"
+                class="text-center text-2xl font-semibold leading-tight text-slate-800 dark:text-slate-200 md:text-4xl"
             >
                 {{ $post->title }}
             </h2>
