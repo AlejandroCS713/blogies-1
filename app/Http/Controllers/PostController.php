@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class PostController extends Controller
@@ -18,8 +19,7 @@ class PostController extends Controller
     {
         $posts = DB::table(table:'posts')->get();
 
-        $posts = Post::all();
-
+        $posts = Post::where('published_at', '<=', Carbon::now())->get();
         return view('posts.index', compact('posts'));
     }
 

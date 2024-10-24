@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|min:5',
             'body' => 'required',
-            'category_id' => 'required|date',
+            'published_at' => 'required',
         ];
     }
 }
