@@ -128,5 +128,12 @@
                 Praesentium, provident accusantium.
             </p>--}}
         </div>
+        <div
+            class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl"
+        >
+            <p>
+                {{ $post->published_at }}
+            </p>
+        </div>
     </article>
 </x-blog-layout>

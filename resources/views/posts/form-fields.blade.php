@@ -16,3 +16,9 @@
     >{{ old('body', $post->body) }}</x-textarea>
     <x-input-error :messages="$errors->get('body')" class="mt-2" />
 </div>
+<div>
+    <x-input-label for="published_at" :value="__('Published')"/>
+    <input type="date" id="published_at" name="published_at" class="block w-full mt-1"
+           value="{{ old('published_at', $post->published_at) }}">
+    <x-input-error :messages="$errors->get('published_at')" class="mt-2" />
+</div>

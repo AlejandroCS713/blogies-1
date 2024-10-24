@@ -11,5 +11,5 @@ class Post extends Model
 
     //protected $table = 'articles';
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'published_at'];
 }
