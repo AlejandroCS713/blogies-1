@@ -135,5 +135,9 @@
                 {{ $post->published_at }}
             </p>
         </div>
+        <div
+            class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl"
+        >
+        </div>
     </article>
 </x-blog-layout>

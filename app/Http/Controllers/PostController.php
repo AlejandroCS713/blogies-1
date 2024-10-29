@@ -35,8 +35,9 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        Post::create($request->validated());
-
+        Post::create(array_merge($request->validated(), [
+            'user_id' => auth()->id(),
+        ]));
         return to_route('posts.index')
             ->with('status', 'Post created successfully');
     }
@@ -48,8 +49,9 @@ class PostController extends Controller
 
     public function  update(UpdatePostRequest $request, Post $post)
     {
-        $post->update($request->validated());
-
+        Post::updated(array_merge($request->validated(), [
+            'user_id' => auth()->id(),
+        ]));
         return to_route('posts.show', $post)
             ->with('status', 'Post updated successfully');
     }
