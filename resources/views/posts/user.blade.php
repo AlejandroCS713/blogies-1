@@ -1,7 +1,7 @@
-<x-blog-layout meta-title="Blog" meta-description="Descripción de la página del Blog">
+<x-blog-layout meta-title="User Posts" meta-description="Posts del usuario">
     <div class="mx-auto mt-4 max-w-6xl">
         <h1 class="my-4 text-center font-serif text-4xl font-extrabold text-sky-600 md:text-5xl">
-            Blog
+            User Posts
         </h1>
 
         @auth
@@ -26,16 +26,6 @@
                             d="M12 4.5v15m7.5-7.5h-15"
                         ></path>
                     </svg>
-                </a>
-            </div>
-            <br>
-            <div class="flex items-center justify-center">
-                <a
-                    href="{{ route('posts.user') }}"
-                    class="group flex items-center rounded-full bg-sky-600 px-6 py-3 text-sky-100 shadow-lg duration-300 hover:bg-sky-700 active:bg-sky-800"
-                >
-                    <!-- Texto con tamaño grande pero sin cambios en su espaciado -->
-                    <span class="text-lg font-semibold">Mis Posts</span>
                 </a>
             </div>
         @endauth

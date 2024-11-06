@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
@@ -62,5 +63,16 @@ class PostController extends Controller
 
         return to_route('posts.index')
             ->with('status', 'Post deleted successfully');
+    }
+
+    public function user()
+    {
+        $posts = DB::table(table:'posts')->get();
+
+        $userId = Auth::id();
+
+        $posts = Post::where('user_id', $userId)->get();
+
+        return view('posts.user', compact('posts'));
     }
 }
