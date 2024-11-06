@@ -67,8 +67,6 @@ class PostController extends Controller
 
     public function user()
     {
-        $posts = DB::table(table:'posts')->get();
-
         $userId = Auth::id();
 
         $posts = Post::where('user_id', $userId)->get();
