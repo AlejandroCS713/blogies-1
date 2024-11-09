@@ -19,6 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'body' => $this->faker->paragraph(),
+            'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

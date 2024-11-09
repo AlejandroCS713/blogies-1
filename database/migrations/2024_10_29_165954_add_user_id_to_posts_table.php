@@ -12,21 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable();
-
-            $table->foreignId('user_id')->references('id')->on('users')
-            ->onDelete('set null');
+            $table->foreignId('user_id')->constrained();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign('posts_user_id_foreign');
-            $table->dropColumn('user_id');
+            $table->dropConstrainedForeignId('user_id');
         });
     }
 };
