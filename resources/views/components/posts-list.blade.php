@@ -43,7 +43,7 @@
     <div class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
         @foreach($posts as $index => $post)
             <article
-                class="post-item flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900 {{ $index >= 30 ? 'hidden' : '' }}"
+                class="post-item flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900 {{ $index >= 10 ? 'hidden' : '' }}"
             >
                 <div class="flex-1 space-y-3 p-5">
                     <h2 class="text-xl font-semibold leading-tight text-slate-800 dark:text-slate-200">
@@ -63,31 +63,73 @@
     </div>
 
 </div>
-@if($posts->count() > 10)
+@if($posts->count() > 9)
 <div class="flex items-center justify-center mt-4">
     <button
-        id="toggle-posts-btn"
+        id="show-more-btn"
         class="bg-sky-600 text-sky-100 px-4 py-2 rounded-full shadow-lg hover:bg-sky-700 active:bg-sky-800"
-        onclick="togglePosts()"
+        onclick="showMorePosts()"
     >
         Ver más posts
+    </button>
+    <button
+        id="show-less-btn"
+        class="bg-sky-600 text-sky-100 px-4 py-2 rounded-full shadow-lg hover:bg-sky-700 active:bg-sky-800"
+        style="display: none;"
+        onclick="showLessPosts()"
+    >
+        Ver menos posts
     </button>
 </div>
 @endif
 
 <script>
-    function togglePosts() {
+    let visiblePosts = 9;
+
+    function showMorePosts() {
         const posts = document.querySelectorAll('.post-item');
-        const toggleBtn = document.getElementById('toggle-posts-btn');
-        let isExpanded = toggleBtn.getAttribute('data-expanded') === 'true';
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const showLessBtn = document.getElementById('show-less-btn');
 
-        posts.forEach((post, index) => {
-            if (index >= 30) {
-                post.classList.toggle('hidden', isExpanded);
-            }
-        });
+        for (let i = visiblePosts; i < visiblePosts + 9 && i < posts.length; i++) {
+            posts[i].classList.remove('hidden');
+        }
+        visiblePosts += 9;
 
-        toggleBtn.setAttribute('data-expanded', !isExpanded);
-        toggleBtn.textContent = isExpanded ? 'Ver más posts' : 'Ver menos posts';
+        updateButtonVisibility();
     }
+
+    function showLessPosts() {
+        const posts = document.querySelectorAll('.post-item');
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const showLessBtn = document.getElementById('show-less-btn');
+
+        visiblePosts -= 9;
+        for (let i = visiblePosts; i < posts.length; i++) {
+            posts[i].classList.add('hidden');
+        }
+
+        updateButtonVisibility();
+    }
+
+    function updateButtonVisibility() {
+        const posts = document.querySelectorAll('.post-item');
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const showLessBtn = document.getElementById('show-less-btn');
+
+        if (visiblePosts >= posts.length) {
+            showMoreBtn.style.display = 'none';
+        } else {
+            showMoreBtn.style.display = 'inline-block';
+        }
+
+        if (visiblePosts <= 9) {
+            showLessBtn.style.display = 'none';
+        } else {
+            showLessBtn.style.display = 'inline-block';
+        }
+    }
+
+    updateButtonVisibility();
+
 </script>
