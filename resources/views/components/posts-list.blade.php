@@ -32,7 +32,7 @@
             <div class="flex items-center justify-center mt-4">
                 <a
                     href="{{ route('posts.user') }}"
-                    class="group flex items-center rounded-full bg-sky-600 px-6 py-3 text-sky-100 shadow-lg duration-300 hover:bg-sky-700 active:bg-sky-800"
+                    class="group flex items-center rounded-full bg-sky-600 px-4 py-2 text-sky-100 shadow-lg duration-300 hover:bg-sky-700 active:bg-sky-800"
                 >
                     <span class="text-lg font-semibold">Mis Posts</span>
                 </a>
