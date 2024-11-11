@@ -247,11 +247,11 @@
                             </svg>
                         @endguest
                         @auth()
-                        <img
-                            class="h-6 w-6 rounded-full"
-                            src="https://ui-avatars.com/api?name={{ Auth::user()->name }}"
-                            alt="{{ Auth::user()->name }}"
-                        />
+                                <img
+                                    class="h-6 w-6 rounded-full"
+                                    src="https://ui-avatars.com/api?name={{ urlencode(Auth::user()->name . ' ' . Auth::user()->last_name) }}"
+                                    alt="{{ Auth::user()->name }} {{ Auth::user()->last_name }}"
+                                />
                         @endauth
                         <div class="ms-1">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
