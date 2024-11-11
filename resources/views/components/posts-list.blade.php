@@ -63,12 +63,12 @@
     </div>
 
 </div>
-@if($posts->count() > 9)
-<div class="flex items-center justify-center mt-1 space-x-2">
-    <div>
-        {{ $posts->links() }}
+@if($posts->hasPages())
+    <div class="flex items-center justify-center mt-1 space-x-2">
+        <div>
+            {{ $posts->links() }}
+        </div>
     </div>
-</div>
 @endif
 <!--
 @if($posts->count() > 9)

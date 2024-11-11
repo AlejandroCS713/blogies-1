@@ -70,8 +70,10 @@ class PostController extends Controller
     {
         $userId = Auth::id();
 
-        $posts = Post::where('user_id', $userId)->get();
+        // Cambia 'get()' por 'paginate()' para habilitar la paginación
+        $posts = Post::where('user_id', $userId)->paginate(9);
 
         return view('posts.user', compact('posts'));
     }
+
 }
