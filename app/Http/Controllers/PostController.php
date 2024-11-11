@@ -20,7 +20,8 @@ class PostController extends Controller
     {
         $posts = DB::table(table:'posts')->get();
 
-        $posts = Post::where('published_at', '<=', Carbon::now())->get();
+        /*$posts = Post::where('published_at', '<=', Carbon::now())->get();*/
+        $posts = Post::where('published_at', '<=', now())->paginate(9);
         return view('posts.index', compact('posts'));
     }
 

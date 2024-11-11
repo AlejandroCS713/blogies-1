@@ -43,8 +43,8 @@
     <div class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
         @foreach($posts as $index => $post)
             <article
-                class="post-item flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900 {{ $index >= 10 ? 'hidden' : '' }}"
-            >
+                class="flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900">
+                <!--class="post-item flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900 {{ $index >= 9 ? 'hidden' : '' }}"-->
                 <div class="flex-1 space-y-3 p-5">
                     <h2 class="text-xl font-semibold leading-tight text-slate-800 dark:text-slate-200">
                         <a class="hover:underline" href="{{ route('posts.show', $post) }}">
@@ -63,6 +63,14 @@
     </div>
 
 </div>
+@if($posts->count() > 9)
+<div class="flex items-center justify-center mt-1 space-x-2">
+    <div>
+        {{ $posts->links() }}
+    </div>
+</div>
+@endif
+<!--
 @if($posts->count() > 9)
 <div class="flex items-center justify-center mt-4">
     <button
@@ -133,3 +141,4 @@
     updateButtonVisibility();
 
 </script>
+-->
