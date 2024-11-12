@@ -154,6 +154,21 @@
                     <p class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
                 </div>
             @endforeach
+
+            {{-- Formulario para añadir un comentario --}}
+            <h3 class="mt-6">Escribe un comentario</h3>
+            <form action="{{ route('comments.store', $post) }}" method="POST" class="mt-4">
+                @csrf <!-- Token de seguridad CSRF -->
+
+                <div class="mb-4">
+                    <textarea name="content" rows="4" class="w-full p-2 border border-gray-300 rounded" placeholder="Escribe tu comentario..." required></textarea>
+                </div>
+
+                <button type="submit" class="bg-sky-600 text-white px-4 py-2 rounded-full hover:bg-sky-700">
+                    Agregar Comentario
+                </button>
+            </form>
         </div>
+
     </article>
 </x-blog-layout>
