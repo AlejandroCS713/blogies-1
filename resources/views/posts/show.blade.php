@@ -140,5 +140,20 @@
             class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl"
         >
         </div>
+        <!-- resources/views/comments/show.blade.php -->
+        <div class="comments mt-6">
+            <h2>Comentarios</h2>
+            @if ($comments->isEmpty())
+                <p>No hay comentarios aún.</p>
+            @endif
+
+            @foreach ($comments as $comment)
+                <div class="comment mt-4 p-4 border-b">
+                    <p><strong>{{ $comment->user->name }}:</strong></p>
+                    <p>{{ $comment->content }}</p>
+                    <p class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
+                </div>
+            @endforeach
+        </div>
     </article>
 </x-blog-layout>
