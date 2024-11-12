@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'David',  // Nombre
             'last_name' => 'Martinez',  // Apellido
             'email' => '1234@gmail.com',  // Correo
-            'password' => Hash::make('asdfasdf'),  // Contraseña cifrada
+            'password' => Hash::make('12345678'),  // Contraseña cifrada
         ]);
 
         // Crear comentarios para todos los posts de todos los usuarios (con el usuario David como autor)
