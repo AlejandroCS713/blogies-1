@@ -5,6 +5,14 @@
 
     <!-- Formulario de Ordenación -->
     <form action="{{ route('posts.index') }}" method="GET" class="mb-4 flex justify-center space-x-4">
+        <!-- Campo de búsqueda de título -->
+        <div class="relative inline-block">
+            <label for="search_title" class="block text-sm font-semibold text-gray-700">Buscar título:</label>
+            <input type="text" name="search_title" id="search_title" value="{{ request('search_title') }}"
+                   class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                   placeholder="Buscar por título">
+        </div>
+
         <!-- Selector de orden -->
         <div class="flex space-x-4 items-center">
             <!-- Selector de orden -->

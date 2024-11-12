@@ -18,14 +18,17 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = DB::table(table:'posts')->get();
-        $orderBy = $request->input('order_by', 'published_at');
-        $orderDirection = $request->input('order_direction', 'desc');
+        $query = Post::query();
+        // Filtra por título si se introduce una búsqueda
+        if ($request->filled('search_title')) {
+            $query->where('title', 'like', '%' . $request->search_title . '%');
+        }
 
-        /*$posts = Post::where('published_at', '<=', Carbon::now())->get();*/
-        $posts = Post::where('published_at', '<=', now())
-            ->orderBy($orderBy, $orderDirection)
-            ->paginate(9);
+        // Ordena según los parámetros seleccionados
+        $orderBy = $request->get('order_by', 'published_at');
+        $orderDirection = $request->get('order_direction', 'asc');
+        $query->orderBy($orderBy, $orderDirection);
+        $posts = $query->paginate(9);
         return view('posts.index', compact('posts', 'orderBy', 'orderDirection'));
     }
 
