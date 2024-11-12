@@ -3,35 +3,6 @@
         {{ $metaTitle }}
     </h1>
 
-    <!-- Formulario de Ordenación -->
-    <form action="{{ route('posts.index') }}" method="GET" class="mb-4 flex justify-center space-x-4">
-        <!-- Selector de orden -->
-        <div class="flex space-x-4 items-center">
-            <!-- Selector de orden -->
-            <div class="relative inline-block">
-                <label for="order_by" class="block text-sm font-semibold text-gray-700">Ordenar por:</label>
-                <select name="order_by" id="order_by" class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                    <option value="published_at" {{ $orderBy == 'published_at' ? 'selected' : '' }}>Fecha de publicación</option>
-                    <option value="created_at" {{ $orderBy == 'created_at' ? 'selected' : '' }}>Fecha de creación</option>
-                </select>
-            </div>
-
-            <!-- Selector de dirección -->
-            <div class="relative inline-block">
-                <label for="order_direction" class="block text-sm font-semibold text-gray-700">Dirección:</label>
-                <select name="order_direction" id="order_direction" class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                    <option value="asc" {{ $orderDirection == 'asc' ? 'selected' : '' }}>Ascendente</option>
-                    <option value="desc" {{ $orderDirection == 'desc' ? 'selected' : '' }}>Descendente</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Botón de aplicar -->
-        <button type="submit" class="text-lg font-semibold group flex items-center rounded-full bg-sky-600 px-3 py-2 text-sky-100 shadow-lg duration-300 hover:bg-sky-700 active:bg-sky-800">
-            Ordenar
-        </button>
-    </form>
-
     @auth
         <div class="flex items-center justify-center">
             <a
@@ -68,6 +39,35 @@
             </div>
         @endif
     @endauth
+
+    <!-- Formulario de Ordenación -->
+    <form action="{{ route('posts.index') }}" method="GET" class="mb-4 flex justify-center space-x-4">
+        <!-- Selector de orden -->
+        <div class="flex space-x-4 items-center">
+            <!-- Selector de orden -->
+            <div class="relative inline-block">
+                <label for="order_by" class="block text-sm font-semibold text-gray-700">Ordenar por:</label>
+                <select name="order_by" id="order_by" class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                    <option value="published_at" {{ $orderBy == 'published_at' ? 'selected' : '' }}>Fecha de publicación</option>
+                    <option value="created_at" {{ $orderBy == 'created_at' ? 'selected' : '' }}>Fecha de creación</option>
+                </select>
+            </div>
+
+            <!-- Selector de dirección -->
+            <div class="relative inline-block">
+                <label for="order_direction" class="block text-sm font-semibold text-gray-700">Dirección:</label>
+                <select name="order_direction" id="order_direction" class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                    <option value="asc" {{ $orderDirection == 'asc' ? 'selected' : '' }}>Ascendente</option>
+                    <option value="desc" {{ $orderDirection == 'desc' ? 'selected' : '' }}>Descendente</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Botón de aplicar -->
+        <button type="submit" class="text-lg font-semibold group flex items-center rounded-full bg-sky-600 px-3 py-2 text-sky-100 shadow-lg duration-300 hover:bg-sky-700 active:bg-sky-800">
+            Ordenar
+        </button>
+    </form>
 
     <div class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
         @foreach($posts as $index => $post)
