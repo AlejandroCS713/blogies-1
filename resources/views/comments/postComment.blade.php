@@ -156,10 +156,11 @@
             @endforeach
 
             {{-- Formulario para añadir un comentario --}}
+            @auth
             <h3 class="mt-6">Escribe un comentario</h3>
+
             <form action="{{ route('comments.store', $post) }}" method="POST" class="mt-4">
                 @csrf <!-- Token de seguridad CSRF -->
-
                 <div class="mb-4">
                     <textarea name="content" rows="4" class="w-full p-2 border border-gray-300 rounded" placeholder="Escribe tu comentario..." required></textarea>
                 </div>
@@ -168,6 +169,7 @@
                     Agregar Comentario
                 </button>
             </form>
+            @endauth
         </div>
 
     </article>

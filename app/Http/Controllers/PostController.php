@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,18 +20,33 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $query = Post::query();
-        // Filtra por título si se introduce una búsqueda
+        $categories = Category::all();
+
+        // Filtrar por título si se introduce una búsqueda
         if ($request->filled('search_title')) {
             $query->where('title', 'like', '%' . $request->search_title . '%');
         }
 
-        // Ordena según los parámetros seleccionados
+        // Filtrar por categoría si se selecciona una
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // Ordenar según los parámetros seleccionados
         $orderBy = $request->get('order_by', 'published_at');
         $orderDirection = $request->get('order_direction', 'asc');
         $query->orderBy($orderBy, $orderDirection);
+
+        // Paginar los resultados
         $posts = $query->paginate(9);
-        return view('posts.index', compact('posts', 'orderBy', 'orderDirection'));
+
+        // Obtener todas las categorías para el desplegable en la vista
+
+
+        // Pasar todas las variables a la vista
+        return view('posts.index', compact('posts', 'orderBy', 'orderDirection', 'categories'));
     }
+
 
     public function show(Post $post)
     {

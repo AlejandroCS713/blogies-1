@@ -13,9 +13,21 @@
                    placeholder="Buscar por título">
         </div>
 
+        <!-- Selector de categoría -->
+        <div class="relative inline-block">
+            <label for="category_id" class="block text-sm font-semibold text-gray-700">Categoría:</label>
+            <select name="category_id" id="category_id" class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                <option value="">Todas las categorías</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <!-- Selector de orden -->
         <div class="flex space-x-4 items-center">
-            <!-- Selector de orden -->
             <div class="relative inline-block">
                 <label for="order_by" class="block text-sm font-semibold text-gray-700">Ordenar por:</label>
                 <select name="order_by" id="order_by" class="p-2 rounded border border-gray-300 bg-white shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
@@ -32,12 +44,14 @@
                 </select>
             </div>
         </div>
+
         <!-- Botón de aplicar -->
         <button type="submit" class="text-lg font-semibold group flex items-center rounded-full bg-sky-600 px-3 py-2 text-sky-100 shadow-lg duration-300 hover:bg-sky-700 active:bg-sky-800">
             Ordenar
         </button>
     </form>
-    @auth
+
+@auth
         <div class="flex items-center justify-center">
             <a
                 href="{{ route('posts.create') }}"

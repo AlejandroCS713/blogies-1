@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-
+use App\Models\Category;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -18,11 +18,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Crear 5 usuarios con 10 posts
-        User::factory(5)->create()->each(function ($user) {
-            // Crear 10 posts para cada usuario
-            $posts = Post::factory(10)->create(['user_id' => $user->id]);
+        $categories = Category::factory()->count(5)->create();
 
-            // No creamos comentarios para el usuario actual
+        // Crear 5 usuarios con 10 posts cada uno
+        User::factory(5)->create()->each(function ($user) use ($categories) {
+            // Crear 10 posts para cada usuario
+            $posts = Post::factory(10)->create([
+                'user_id' => $user->id,
+                'category_id' => $categories->random()->id, // Asignar una categoría aleatoria
+            ]);
         });
 
         // Crear un usuario específico, "David"
