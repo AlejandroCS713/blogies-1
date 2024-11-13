@@ -53,6 +53,8 @@ class PostController extends Controller
         return view('posts.show', compact('post'));
     }
 
+
+
     public function create()
     {
         return view('posts.create', ['post' => new Post()]);
@@ -95,12 +97,23 @@ class PostController extends Controller
         $orderBy = $request->input('order_by', 'published_at');
         $orderDirection = $request->input('order_direction', 'desc');
 
-        // Cambia 'get()' por 'paginate()' para habilitar la paginación
-        $posts = Post::where('user_id', $userId)
-            ->orderBy($orderBy, $orderDirection)
-            ->paginate(9);
+        $query = Post::where('user_id', $userId);
+        // Filtra por título si se introduce una búsqueda
+        if ($request->filled('search_title')) {
+            $query->where('title', 'like', '%' . $request->search_title . '%');
+        }
+        // Filtra por categoría si se selecciona una categoría
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+        // Ordena según los parámetros seleccionados
+        $query->orderBy($orderBy, $orderDirection);
+        // Realiza la paginación
+        $posts = $query->paginate(9);
+        // Obtener todas las categorías para el formulario
+        $categories = Category::all();
 
-        return view('posts.user', compact('posts', 'orderBy', 'orderDirection'));
+        return view('posts.user', compact('posts', 'orderBy', 'orderDirection', 'categories'));
     }
 
 }
