@@ -90,9 +90,7 @@
 
     <div class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
         @foreach($posts as $index => $post)
-            <article
-                class="flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900">
-                <!--class="post-item flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900 {{ $index >= 9 ? 'hidden' : '' }}"-->
+            <article class="flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900">
                 <div class="flex-1 space-y-3 p-5">
                     <h2 class="text-xl font-semibold leading-tight text-slate-800 dark:text-slate-200">
                         <a class="hover:underline" href="{{ route('posts.show', $post) }}">
@@ -105,10 +103,15 @@
                     <p class="hidden text-slate-500 dark:text-slate-400 md:block">
                         {{ $post->published_at }}
                     </p>
+                    <!-- Mostrar el nombre de la categoría -->
+                    <p class="text-slate-500 dark:text-slate-400 md:block">
+                        Categoría: {{ $post->category->name }}
+                    </p>
                 </div>
             </article>
         @endforeach
     </div>
+
 
 </div>
 
