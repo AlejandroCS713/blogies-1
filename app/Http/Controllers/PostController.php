@@ -89,14 +89,23 @@ class PostController extends Controller
         return view('posts.edit', compact('post', 'categories'));
     }
 
-    public function  update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $post->update(array_merge($request->validated(), [
+        // Obtén los datos validados del formulario
+        $validated = $request->validated();
+
+        // Asegúrate de que el 'category_id' se incluya en los datos actualizados
+        $validated['category_id'] = $validated['category_id'] ?? $post->category_id;
+
+        // Actualiza el post con los datos validados
+        $post->update(array_merge($validated, [
             'user_id' => auth()->id(),
         ]));
+
         return to_route('posts.show', $post)
             ->with('status', 'Post updated successfully');
     }
+
 
     public function destroy(Post $post)
     {
