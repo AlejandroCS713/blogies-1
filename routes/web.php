@@ -10,7 +10,9 @@ Route::view('contacto', 'contact')->name('contact');
 Route::get('blog/user', [PostController::class, 'user'])->name('posts.user');
 Route::get('blog/{post}/comments', [CommentController::class, 'index'])->name('comments.index');
 Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
-Route::get('/user-posts', [PostController::class, 'showUserPosts'])->name('posts.user');
+Route::get('/user-posts', [PostController::class, 'user'])->name('posts.user');
+
+
 
 Route::resource('blog', PostController::class)
     ->names('posts')
