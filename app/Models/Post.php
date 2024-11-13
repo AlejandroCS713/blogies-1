@@ -13,7 +13,7 @@ class Post extends Model
 
     //protected $table = 'articles';
 
-    protected $fillable = ['title', 'body', 'published_at', 'user_id'];
+    protected $fillable = ['title', 'body', 'published_at', 'user_id', 'category_id'];
 
     public function user(): BelongsTo
     {

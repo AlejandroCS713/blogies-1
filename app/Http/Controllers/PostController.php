@@ -57,21 +57,36 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create', ['post' => new Post()]);
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('posts.create', ['post' => new Post()], compact('categories'));
     }
 
     public function store(StorePostRequest $request)
     {
-        Post::create(array_merge($request->validated(), [
-            'user_id' => auth()->id(),
-        ]));
-        return to_route('posts.index')
+        // Validar los datos del formulario
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'published_at' => 'required|date',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        // Asignar el user_id automáticamente desde el usuario autenticado
+        $validated['user_id'] = auth()->id();
+
+        // Crear el post con los datos validados, incluyendo el user_id
+        Post::create($validated);
+
+        // Redirigir a la lista de posts o a donde desees
+        return redirect()->route('posts.index')
             ->with('status', 'Post created successfully');
     }
 
+
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     public function  update(UpdatePostRequest $request, Post $post)
